@@ -1,0 +1,9 @@
+export { default as Footer } from "./Footer";
+export { default as Home } from "./Home";
+export { default as Login } from "./Login";
+export { default as Navbar } from "./Navbar";
+export { default as Signup } from "./Signup";
+export { default as MyOrders } from "./MyOrders";
+export { default as AllOrders } from "./AllOrders";
+export { default as AddProduct } from "./AddProduct";
+export { default as Dashboard } from "./Dashboard";
