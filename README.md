@@ -16,11 +16,15 @@
 
 <img src="./images/4.png" />
 
-## Dashboard
+## Dashboard (admin only)
 
 <img src="./images/5.png" />
 
-## Add Product
+## All Orders (admin only)
+
+<img src="./images/15.png" />
+
+## Add Product (admin only)
 
 <img src="./images/6.png" />
 
