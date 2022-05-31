@@ -18,7 +18,7 @@ const AddProduct = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/products",
+        "https://imdaras-shopkart.herokuapp.com/api/products",
         product,
         { headers: { authorization: token } }
       );

@@ -8,6 +8,7 @@ import nameReducer from "./nameSlice";
 import userReducer from "./userSlice";
 import productReducer from "./productSlice";
 import showReducer from "./showSlice";
+import currentPageReducer from "./currentPageSlice";
 import openReducer from "./openSlice";
 import tokenReducer from "./tokenSlice";
 
@@ -22,6 +23,7 @@ const store = configureStore({
     user: userReducer,
     product: productReducer,
     showStatus: showReducer,
+    currentPage: currentPageReducer,
     open: openReducer,
     token: tokenReducer,
   },

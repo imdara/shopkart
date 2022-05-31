@@ -9,9 +9,12 @@ const MyOrders = () => {
   const token = useSelector((state) => state.token.value);
   const orders = useSelector((state) => state.orders.value);
   const getOrders = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/orders", {
-      headers: { authorization: token },
-    });
+    const { data } = await axios.get(
+      "https://imdaras-shopkart.herokuapp.com/api/orders",
+      {
+        headers: { authorization: token },
+      }
+    );
     dispatch(setOrders(data));
   };
   useEffect(() => {

@@ -1,24 +1,22 @@
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentPage } from "../app/currentPageSlice";
 import { HashLink } from "react-router-hash-link";
 
 const Pagination = () => {
-  var [currentPage, setCurrentPage] = useState(1);
-  var [id, setId] = useState(1);
-  var offset = id == 3 ? 8 * id : 6 * id;
-  var limit = id == 3 ? 10 * id : 12 * id;
-  useEffect(() => {
-    return () => {
-      setCurrentPage(1);
-    };
-  });
+  const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.currentPage.value);
+  var offset = currentPage == 3 ? 8 * currentPage : 6 * currentPage;
+  var limit = currentPage == 3 ? 10 * currentPage : 12 * currentPage;
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{id == 1 ? 1 : offset}</span>{" "}
-            to <span className="font-medium">{id == 1 ? 12 : limit}</span> of{" "}
-            <span className="font-medium">30</span> results
+            Showing{" "}
+            <span className="font-medium">{currentPage == 1 ? 1 : offset}</span>{" "}
+            to{" "}
+            <span className="font-medium">{currentPage == 1 ? 12 : limit}</span>{" "}
+            of <span className="font-medium">30</span> results
           </p>
         </div>
         <div>
@@ -31,8 +29,7 @@ const Pagination = () => {
               to="/#app"
               aria-current="page"
               onClick={() => {
-                setId(1);
-                setCurrentPage(1);
+                dispatch(setCurrentPage(1));
               }}
               className={
                 currentPage == 1
@@ -50,8 +47,7 @@ const Pagination = () => {
                   : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               }
               onClick={() => {
-                setId(2);
-                setCurrentPage(2);
+                dispatch(setCurrentPage(2));
               }}
             >
               2
@@ -64,8 +60,7 @@ const Pagination = () => {
                   : "rounded-r-md bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               }
               onClick={() => {
-                setId(3);
-                setCurrentPage(3);
+                dispatch(setCurrentPage(3));
               }}
             >
               3

@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setCurrentPage } from "../app/currentPageSlice";
 import { showCart, hideCart } from "../app/openSlice";
 import { setCartProducts } from "../app/cartProductsSlice";
 import { setToken } from "../app/tokenSlice";
@@ -41,14 +42,14 @@ const Navbar = () => {
 
   const initPayment = (data) => {
     const options = {
-      key: "rzp_test_XwI439dN2UFVur",
+      key: process.env.RAZORPAY_KEY_ID,
       amount: data.amount,
       currency: data.currency,
       order_id: data.id,
       handler: async (response) => {
         try {
           const { data } = await axios.post(
-            "http://localhost:4000/api/payments/verify",
+            "https://imdaras-shopkart.herokuapp.com/api/payments/verify",
             response,
             {
               headers: { authorization: token },
@@ -70,7 +71,7 @@ const Navbar = () => {
       dispatch(hideCart());
     } else {
       const { data } = await axios.post(
-        "http://localhost:4000/api/payments",
+        "https://imdaras-shopkart.herokuapp.com/api/payments",
         {
           amount: cartTotal,
           products: cartProducts.map((product) => ({
@@ -262,6 +263,7 @@ const Navbar = () => {
                         <Link
                           key={item.name}
                           to={item.path}
+                          onClick={() => dispatch(setCurrentPage(1))}
                           className={classNames(
                             item.current
                               ? "bg-indigo-900 text-white"
@@ -337,20 +339,22 @@ const Navbar = () => {
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.path}
-                    className={classNames(
-                      item.current
-                        ? "bg-indigo-900 text-white"
-                        : "text-indigo-300 hover:bg-indigo-700 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
+                  <Link to={item.path}>
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      onClick={() => dispatch(setCurrentPage(1))}
+                      className={classNames(
+                        item.current
+                          ? "bg-indigo-900 text-white"
+                          : "text-indigo-300 hover:bg-indigo-700 hover:text-white",
+                        "block px-3 py-2 rounded-md text-base font-medium"
+                      )}
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  </Link>
                 ))}
               </div>
             </Disclosure.Panel>

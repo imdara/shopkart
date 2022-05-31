@@ -4,7 +4,7 @@ const Order = ({ order }) => {
     <>
       <div className="flex justify-start item-start space-y-2 flex-col ">
         <h1 className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9  text-gray-800">
-          Order id: {_id}
+          Order id: {_id.substr(0, 10)}
         </h1>
         <p className="text-base font-medium leading-6 text-gray-600">
           Ordered on {createdAt.substr(0, 10)} {createdAt.substr(11, 5)} (GMT

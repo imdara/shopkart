@@ -13,26 +13,40 @@ const Home = () => {
   const token = useSelector((state) => state.token.value);
   const products = useSelector((state) => state.products.value);
   var { id } = useParams();
+  // var offset = 2 * (id + 1) * id;
   var offset = id == 3 ? 8 * id : 6 * id;
   var limit = 12 * id;
+
   const getProducts = async () => {
     if (offset && limit) {
       var { data } = await axios.get(
-        `http://localhost:4000/api/products?offset=${offset}&limit=${limit}`
+        `https://imdaras-shopkart.herokuapp.com/api/products?offset=${offset}&limit=${limit}`
       );
-    } else var { data } = await axios.get("http://localhost:4000/api/products");
+    } else
+      var { data } = await axios.get(
+        "https://imdaras-shopkart.herokuapp.com/api/products"
+      );
     dispatch(setProducts(data));
   };
+
   const getName = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/auth", {
-      headers: { authorization: token },
-    });
+    const { data } = await axios.get(
+      "https://imdaras-shopkart.herokuapp.com/api/auth",
+      {
+        headers: { authorization: token },
+      }
+    );
     dispatch(setName(data));
   };
+
   useEffect(() => {
     getProducts();
-    getName();
   }, [products]);
+
+  useEffect(() => {
+    getName();
+  }, [name]);
+
   return (
     <>
       {name && (

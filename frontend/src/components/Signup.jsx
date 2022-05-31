@@ -18,11 +18,10 @@ const Signup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/auth/signup",
+      const { data } = await axios.post(
+        "https://imdaras-shopkart.herokuapp.com/api/auth/signup",
         user
       );
-      const data = await res.data;
       dispatch(setMessage(data));
       dispatch(show());
     } catch (err) {

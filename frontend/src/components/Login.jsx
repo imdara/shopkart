@@ -21,17 +21,15 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/auth/login",
+      const { data } = await axios.post(
+        "https://imdaras-shopkart.herokuapp.com/api/auth/login",
         user
       );
-      const data = await res.data;
       dispatch(setMessage(data.message));
       if (data.token) {
         const token = "Bearer " + data.token;
         cookies.set("token", token, { path: "/", maxAge: 1000 * 60 * 60 * 24 });
         dispatch(setToken(token));
-        dispatch(show());
       } else dispatch(show());
     } catch (err) {
       console.log(err);

@@ -9,9 +9,12 @@ const Dashboard = () => {
   const token = useSelector((state) => state.token.value);
   const statistics = useSelector((state) => state.statistics.value);
   const getStatistics = async () => {
-    const { data } = await axios.get("http://localhost:4000/api/statistics", {
-      headers: { authorization: token },
-    });
+    const { data } = await axios.get(
+      "https://imdaras-shopkart.herokuapp.com/api/statistics",
+      {
+        headers: { authorization: token },
+      }
+    );
     data === "You dont have access to this"
       ? dispatch(setStatistics(null))
       : dispatch(setStatistics(data));
