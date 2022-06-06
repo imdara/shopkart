@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Home = () => {
 
   return (
     <>
+      <ToastContainer />
       {name && (
         <h3 className="p-2 font-medium text-indigo-600 text-center">
           Welcome {name}
