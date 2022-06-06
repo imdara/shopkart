@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setCartProducts } from "../app/cartProductsSlice";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const ProductCard = ({ product }) => {
       dispatch(
         setCartProducts([...cartProducts, { imageUrl, name, price, quantity }])
       );
+      toast("Added to Cart");
     } else {
       const newQuantity = productExist.quantity + 1;
       const newCartProducts = cartProducts.filter(
@@ -39,6 +41,7 @@ const ProductCard = ({ product }) => {
           { imageUrl, name, price, quantity: newQuantity },
         ])
       );
+      toast("Added to Cart");
     }
   };
 
